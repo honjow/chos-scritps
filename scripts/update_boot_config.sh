@@ -1,5 +1,7 @@
 #!/bin/bash
 
+AUTO_INSTALL=1
+
 # Check if the script is running with root or sudo privileges
 if [ "$EUID" -ne 0 ]; then
     echo "This script must be run as root or with sudo."
@@ -48,7 +50,9 @@ if [ -f "/boot/loader/entries/frzr.conf" ]; then
 	/home/gamer/scripts/add-mkinitcpio-hook.sh resume
 	/home/gamer/scripts/mkinitcpio-update.sh
 
-	/home/gamer/scripts/auto_install.sh
+    if [[ "x$AUTO_INSTALL" == "x1" ]]; then
+        /home/gamer/scripts/auto_install.sh
+    fi
     else
         # 获取已存在的 resume= 行的内容
         existing_resume=$(grep -o "resume=[^[:space:]]*" "/boot/loader/entries/frzr.conf")
@@ -58,8 +62,9 @@ if [ -f "/boot/loader/entries/frzr.conf" ]; then
         if [ "${existing_resume}" != "${RESUME_CMD}" ]; then
             sed -i "s/${existing_resume}/${RESUME_CMD}/" "/boot/loader/entries/frzr.conf"
             echo "Replaced existing RESUME_CMD in frzr.conf"
-	    /home/gamer/scripts/mkinitcpio-update.sh
-
+            
+            /home/gamer/scripts/add-mkinitcpio-hook.sh resume
+	        /home/gamer/scripts/mkinitcpio-update.sh
         else
             echo "RESUME_CMD already present and matches in frzr.conf"
         fi

@@ -15,6 +15,12 @@ pacman -Sy
 pacman -U /home/gamer/pkgs/*.zst --noconfirm --overwrite \*
 pacman -U /home/gamer/pkgs/gparted/*.zst --noconfirm --overwrite \*
 
+#pacman -U /home/gamer/pkgs/python/*.zst --noconfirm --overwrite \*
+#cd /home/gamer/git/HandyGCCS
+#sudo -u gamer sed -i "s/handycon.CAPTURE_CONTROLLER = True/handycon.CAPTURE_CONTROLLER = False/" src/handycon/handhelds/ally_gen1.py
+#sudo -u gamer sed -i "s/handycon.CAPTURE_KEYBOARD = True/handycon.CAPTURE_KEYBOARD = False/" src/handycon/handhelds/ally_gen1.py
+#sudo ./build.sh
+
 systemctl enable --now ayaled
 systemctl restart ayaled
 systemctl enable --now onedrive@gamer
