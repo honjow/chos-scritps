@@ -1,0 +1,13 @@
+[Unit]
+Description=Update Boot Configuration Service
+After=network.target
+
+[Service]
+ExecStartPre=/bin/sleep 10
+Type=simple
+User=root
+ExecStart=/home/gamer/scripts/update_boot_config.sh
+
+[Install]
+WantedBy=multi-user.target
+

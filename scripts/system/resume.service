@@ -1,0 +1,11 @@
+[Unit]
+Description=Local system resume actions
+After=suspend.target
+
+[Service]
+Type=simple
+User=root
+ExecStart=/home/gamer/scripts/resume.sh
+
+[Install]
+WantedBy=suspend.target

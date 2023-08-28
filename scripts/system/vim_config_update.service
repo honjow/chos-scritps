@@ -1,0 +1,13 @@
+[Unit]
+Description=Vim Config Update Service
+After=network.target
+
+[Service]
+ExecStartPre=/bin/sleep 60
+Type=simple
+User=root
+ExecStart=/home/gamer/scripts/vim_config_update.sh
+
+[Install]
+WantedBy=multi-user.target
+
