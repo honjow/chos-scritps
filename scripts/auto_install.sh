@@ -6,6 +6,9 @@ if [ "$EUID" -ne 0 ]; then
     exit 1
 fi
 
+DEVICENAME=$(cat /sys/devices/virtual/dmi/id/product_name)
+VENDOR=$(cat /sys/devices/virtual/dmi/id/sys_vendor)
+
 set -e
 
 frzr-unlock
@@ -21,10 +24,19 @@ pacman -U /home/gamer/pkgs/python/*.zst --noconfirm --overwrite \*
 #sudo -u gamer sed -i "s/handycon.CAPTURE_KEYBOARD = True/handycon.CAPTURE_KEYBOARD = False/" src/handycon/handhelds/ally_gen1.py
 #sudo ./build.sh
 
-systemctl enable --now ayaled
-systemctl restart ayaled
+if [[ "$VENDOR" == "AYANEO" ]]; then
+    systemctl enable --now ayaled
+    systemctl restart ayaled
+fi
+
+home-swap_status=$(systemctl is-enabled home-swapfile.swap 2>/dev/null)
+if [[ "$home-swap_status" == "enabled" ]]; then
+    systemctl disable --now home-swapfile.swap
+fi
+
+decky_status=$(systemctl is-active plugin_loader.service 2>/dev/null)
+if [[ "$decky_status" == "active" ]]; then
+    systemctl restart plugin_loader.service
+fi
+
 systemctl enable --now onedrive@gamer
-
-systemctl disable --now home-swapfile.swap
-
-systemctl restart plugin_loader.service
