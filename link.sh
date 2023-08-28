@@ -1,1 +1,1 @@
-ln -sf $(pwd)/scripts ~/scripts
+ln -sf $(pwd)/scripts ${HOME}/scripts
