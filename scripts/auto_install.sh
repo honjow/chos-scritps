@@ -9,8 +9,6 @@ fi
 DEVICENAME=$(cat /sys/devices/virtual/dmi/id/product_name)
 VENDOR=$(cat /sys/devices/virtual/dmi/id/sys_vendor)
 
-set -e
-
 frzr-unlock
 
 pacman -Sy
@@ -29,8 +27,8 @@ if [[ "$VENDOR" == "AYANEO" ]]; then
     systemctl restart ayaled
 fi
 
-home-swap_status=$(systemctl is-enabled home-swapfile.swap 2>/dev/null)
-if [[ "$home-swap_status" == "enabled" ]]; then
+home_swap_status=$(systemctl is-enabled home-swapfile.swap 2>/dev/null)
+if [[ "$home_swap_status" == "enabled" ]]; then
     systemctl disable --now home-swapfile.swap
 fi
 
