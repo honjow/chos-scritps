@@ -10,4 +10,3 @@ cp ./system/* /etc/systemd/system/
 
 systemctl enable resume.service
 systemctl enable update_boot_config.service
-systemctl enable vim_config_update.service

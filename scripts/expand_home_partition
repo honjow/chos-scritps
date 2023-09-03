@@ -42,7 +42,7 @@ if [[ $home_size -lt 20480 && $unallocated_space -gt 0 ]]; then
         resize2fs $home_device
     elif [[ $home_filesystem == "btrfs" ]]; then
         # 使用 btrfs filesystem resize 命令扩展 btrfs 文件系统        
-        btrfs filesystem resize max $home_device
+        btrfs filesystem resize max /home
     else
         echo "不支持的文件系统类型"
         exit 1
