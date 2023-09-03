@@ -13,14 +13,11 @@ frzr-unlock
 
 pacman -Sy
 
-pacman -U /home/gamer/pkgs/*.zst --noconfirm --overwrite \*
-pacman -U /home/gamer/pkgs/gparted/*.zst --noconfirm --overwrite \*
+pacman -U /home/gamer/pkgs/*.zst --noconfirm --overwrite \* 2>/dev/null
+#pacman -U /home/gamer/pkgs/gparted/*.zst --noconfirm --overwrite \*
 
-pacman -U /home/gamer/pkgs/python/*.zst --noconfirm --overwrite \*
-#cd /home/gamer/git/HandyGCCS
-#sudo -u gamer sed -i "s/handycon.CAPTURE_CONTROLLER = True/handycon.CAPTURE_CONTROLLER = False/" src/handycon/handhelds/ally_gen1.py
-#sudo -u gamer sed -i "s/handycon.CAPTURE_KEYBOARD = True/handycon.CAPTURE_KEYBOARD = False/" src/handycon/handhelds/ally_gen1.py
-#sudo ./build.sh
+pacman -U /home/gamer/pkgs/python/*.zst --noconfirm --overwrite \* 2>/dev/null
+
 
 if [[ "$VENDOR" == "AYANEO" ]]; then
     systemctl enable --now ayaled
@@ -36,5 +33,7 @@ decky_status=$(systemctl is-active plugin_loader.service 2>/dev/null)
 if [[ "$decky_status" == "active" ]]; then
     systemctl restart plugin_loader.service
 fi
+
+./vim_config_update.sh
 
 systemctl enable --now onedrive@gamer

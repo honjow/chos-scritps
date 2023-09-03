@@ -1,0 +1,13 @@
+[Unit]
+Description=power-button-handler
+After=network.target
+
+[Service]
+#ExecStartPre=/bin/sleep 10
+Type=simple
+User=root
+ExecStart=/home/gamer/scripts/power-button-handler.py
+
+[Install]
+WantedBy=multi-user.target
+
