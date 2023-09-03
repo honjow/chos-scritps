@@ -34,6 +34,4 @@ if [[ "$decky_status" == "active" ]]; then
     systemctl restart plugin_loader.service
 fi
 
-./vim_config_update.sh
-
 systemctl enable --now onedrive@gamer
