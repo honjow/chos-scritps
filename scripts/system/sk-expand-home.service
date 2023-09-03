@@ -1,0 +1,12 @@
+[Unit]
+Description=Home Partition Resize
+After=network.target
+
+[Service]
+#Type=oneshot
+User=root
+ExecStart=/home/gamer/scripts/expand_home_partition.expect
+TimeoutStartSec=0
+
+[Install]
+WantedBy=multi-user.target
